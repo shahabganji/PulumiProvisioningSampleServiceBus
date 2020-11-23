@@ -18,12 +18,12 @@ namespace PulumiProvisioningSampleServiceBus
 
         private void ProvisioningServiceBus()
         {
-            var resourceGroup = new ResourceGroup("rg-sample");
+            var resourceGroup = new ResourceGroup("shahab");
 
             var serviceBusNamespace = new Pulumi.Azure.ServiceBus.Namespace(
-                "sbns-sample", new Pulumi.Azure.ServiceBus.NamespaceArgs
+                "sbns-shahab-sample", new Pulumi.Azure.ServiceBus.NamespaceArgs
                 {
-                    Location = "westeurope",
+                    // Location = "westeurope",
                     ResourceGroupName = resourceGroup.Name,
                     Sku = "Standard",
                     Tags =
@@ -58,7 +58,7 @@ namespace PulumiProvisioningSampleServiceBus
         private void ProvisioningSubscriptions()
         {
             var sampleSubscriptionOnFirstTopic =
-                new Pulumi.Azure.ServiceBus.Subscription("sbs-sample",
+                new Pulumi.Azure.ServiceBus.Subscription("sbs-sample-first-topic",
                     new Pulumi.Azure.ServiceBus.SubscriptionArgs
                     {
                         Name = "sbs-sample",
@@ -69,7 +69,7 @@ namespace PulumiProvisioningSampleServiceBus
                     });
 
             var sampleSubscriptionOnSecondTopic =
-                new Pulumi.Azure.ServiceBus.Subscription("sbs-sample",
+                new Pulumi.Azure.ServiceBus.Subscription("sbs-sample-second-topic",
                     new Pulumi.Azure.ServiceBus.SubscriptionArgs
                     {
                         Name = "sbs-sample",
