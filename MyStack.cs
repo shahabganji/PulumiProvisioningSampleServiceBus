@@ -1,5 +1,6 @@
 using Pulumi;
 using Pulumi.Azure.Core;
+using Pulumi.Azure.ServiceBus;
 
 namespace PulumiProvisioningSampleServiceBus
 {
@@ -20,8 +21,8 @@ namespace PulumiProvisioningSampleServiceBus
         {
             var resourceGroup = new ResourceGroup("shahab");
 
-            var serviceBusNamespace = new Pulumi.Azure.ServiceBus.Namespace(
-                "sbns-shahab-sample", new Pulumi.Azure.ServiceBus.NamespaceArgs
+            var serviceBusNamespace = new Namespace(
+                "sbns-shahab-sample", new NamespaceArgs
                 {
                     // Location = "westeurope",
                     ResourceGroupName = resourceGroup.Name,
@@ -32,8 +33,8 @@ namespace PulumiProvisioningSampleServiceBus
                     },
                 });
 
-            var firstTopic = new Pulumi.Azure.ServiceBus.Topic("sbt-first",
-                new Pulumi.Azure.ServiceBus.TopicArgs
+            var firstTopic = new Topic("sbt-first",
+                new TopicArgs
                 {
                     Name = "sbt-first",
                     ResourceGroupName = resourceGroup.Name,
@@ -41,8 +42,8 @@ namespace PulumiProvisioningSampleServiceBus
                     EnablePartitioning = false,
                 });
 
-            var secondTopic = new Pulumi.Azure.ServiceBus.Topic("sbt-second",
-                new Pulumi.Azure.ServiceBus.TopicArgs
+            var secondTopic = new Topic("sbt-second",
+                new TopicArgs
                 {
                     Name = "sbt-second",
                     ResourceGroupName = resourceGroup.Name,
@@ -58,8 +59,8 @@ namespace PulumiProvisioningSampleServiceBus
         private void ProvisioningSubscriptions()
         {
             var sampleSubscriptionOnFirstTopic =
-                new Pulumi.Azure.ServiceBus.Subscription("sbs-sample-first-topic",
-                    new Pulumi.Azure.ServiceBus.SubscriptionArgs
+                new Subscription("sbs-sample-first-topic",
+                    new SubscriptionArgs
                     {
                         Name = "sbs-sample",
                         ResourceGroupName = SampleResourceGroupName,
@@ -69,8 +70,8 @@ namespace PulumiProvisioningSampleServiceBus
                     });
 
             var sampleSubscriptionOnSecondTopic =
-                new Pulumi.Azure.ServiceBus.Subscription("sbs-sample-second-topic",
-                    new Pulumi.Azure.ServiceBus.SubscriptionArgs
+                new Subscription("sbs-sample-second-topic",
+                    new SubscriptionArgs
                     {
                         Name = "sbs-sample",
                         ResourceGroupName = SampleResourceGroupName,
